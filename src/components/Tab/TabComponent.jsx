@@ -80,7 +80,15 @@ const TabComponent = (props) => {
             : {}
         }
       />
-      {/* <TableList index={1} value={value} data={data} /> */}
+      <TableList
+        index={1}
+        value={value}
+        data={
+          data.stateWiseData
+            ? data.stateWiseData.filter((item, index) => index !== 0)
+            : []
+        }
+      />
       {/* <Chart index={1} value={value} data={nationalData.caseTimeSeries} /> */}
     </div>
   );

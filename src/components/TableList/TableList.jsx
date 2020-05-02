@@ -35,9 +35,9 @@ const TableList = ({ index, value, data }) => {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.state}>
+            <TableRow key={item.stateName}>
               <TableCell component="th" scope="row">
-                {item.state}
+                {item.stateName}
               </TableCell>
               <TableCell align="right">{item.confirmed}</TableCell>
               <TableCell align="right">{item.active}</TableCell>
