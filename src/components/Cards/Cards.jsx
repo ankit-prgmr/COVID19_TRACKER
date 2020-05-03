@@ -10,8 +10,11 @@ const Cards = ({ index, value, data }) => {
   if (!confirmed) {
     return "Loading...";
   }
+  const lastUpdatedTime =
+    (index === 0 ? new Date(lastUpdate).toLocaleString() : lastUpdate) + " IST";
   return (
     <div className={styles.container}>
+      <p className={styles.dateTime}>Last updated at {lastUpdatedTime}</p>
       <Grid container spacing={3} justify="center">
         <Grid
           item
@@ -26,9 +29,6 @@ const Cards = ({ index, value, data }) => {
             </Typography>
             <Typography variant="h5">
               <CountUp start={0} end={confirmed} duration={2.5} separator="," />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
             </Typography>
             <Typography variant="body2">
               Number of confirmed cases of COVID-19
@@ -50,9 +50,6 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={recovered} duration={2.5} separator="," />
             </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
-            </Typography>
             <Typography variant="body2">
               Number of recoveries from COVID-19
             </Typography>
@@ -72,9 +69,6 @@ const Cards = ({ index, value, data }) => {
             </Typography>
             <Typography variant="h5">
               <CountUp start={0} end={deaths} duration={2.5} separator="," />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date(lastUpdate).toDateString()}
             </Typography>
             <Typography variant="body2">
               Number of deaths caused by COVID-19

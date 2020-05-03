@@ -1,38 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { fetchDailyData } from "../../api";
+import React from "react";
 import { Line, Bar } from "react-chartjs-2";
 
 import styles from "./Chart.module.css";
 
-const Chart = ({ data, country }) => {
-  const [dailyData, setDailyData] = useState([]);
+const Chart = ({ index, value, graphData, country }) => {
+  if (value !== index) return null;
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      setDailyData(await fetchDailyData());
-    };
-    fetchApi();
-  }, []);
+  let dataset = [],
+    chartTitle = "",
+    isGraphDataArr = Array.isArray(graphData);
 
-  const lineChart = dailyData.length ? (
+  if (graphData && index === 0 && isGraphDataArr) {
+    console.log(graphData);
+    dataset = [
+      {
+        data: graphData.map(({ confirmed }) => confirmed),
+        label: "Confirmed",
+        borderColor: "#3333FF",
+        fill: true,
+      },
+      {
+        data: graphData.map(({ deaths }) => deaths),
+        label: "Deaths",
+        borderColor: "red",
+        backgroundColor: "rgba(255,0,0,0.5)",
+        fill: true,
+      },
+    ];
+    chartTitle = "";
+  } else if (graphData && index === 1 && isGraphDataArr) {
+    dataset = [
+      {
+        data: graphData.map(({ confirmed }) => confirmed),
+        label: "Confirmed",
+        borderColor: "#3333FF",
+        fill: true,
+      },
+      {
+        data: graphData.map(({ recovered }) => recovered),
+        label: "Recovered",
+        borderColor: "green",
+        fill: true,
+      },
+      {
+        data: graphData.map(({ deaths }) => deaths),
+        label: "Deaths",
+        borderColor: "red",
+        backgroundColor: "rgba(255,0,0,0.5)",
+        fill: true,
+      },
+    ];
+    chartTitle = "Daily Cases Timeline";
+  }
+
+  const lineChart = graphData[0] ? (
     <Line
       data={{
-        labels: dailyData.map(({ date }) => date),
-        datasets: [
-          {
-            data: dailyData.map(({ confirmed }) => confirmed),
-            label: "Infected",
-            borderColor: "#3333FF",
-            fill: true,
-          },
-          {
-            data: dailyData.map(({ deaths }) => deaths),
-            label: "Deaths",
-            borderColor: "red",
-            backgroundColor: "rgba(255,0,0,0.5)",
-            fill: true,
-          },
-        ],
+        labels: graphData.map(({ date }) => date),
+        datasets: dataset,
+      }}
+      options={{
+        title: { display: true, text: chartTitle },
       }}
     />
   ) : null;
@@ -40,7 +68,7 @@ const Chart = ({ data, country }) => {
   const barChart = country ? (
     <Bar
       data={{
-        labels: ["Infected", "Recovered", "Deaths"],
+        labels: ["Confirmed", "Recovered", "Deaths"],
         datasets: [
           {
             label: "People",
@@ -49,11 +77,7 @@ const Chart = ({ data, country }) => {
               "rgba(0,255,0,0.5)",
               "rgba(255,0,0,0.5)",
             ],
-            data: [
-              data.confirmed.value,
-              data.recovered.value,
-              data.deaths.value,
-            ],
+            data: [graphData.confirmed, graphData.recovered, graphData.deaths],
           },
         ],
       }}

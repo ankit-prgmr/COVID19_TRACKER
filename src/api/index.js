@@ -16,6 +16,7 @@ export const fetchData = async (country) => {
       deaths: data.deaths.value,
       lastUpdate: data.lastUpdate,
     };
+    console.log(modifiedData.lastUpdate);
     return modifiedData;
   } catch (error) {
     console.log(error);
@@ -79,8 +80,13 @@ export const fetchNationalData = async () => {
     );
 
     const dailyNationalData = data.cases_time_series.map(
-      ({ dailyconfirmed, dailydeceased, dailyrecovered, date }) => {
-        return { dailyconfirmed, dailydeceased, dailyrecovered, date };
+      ({
+        dailyconfirmed: confirmed,
+        dailydeceased: deaths,
+        dailyrecovered: recovered,
+        date,
+      }) => {
+        return { confirmed, deaths, recovered, date };
       }
     );
     return { stateWiseData, dailyNationalData };

@@ -1,7 +1,6 @@
 .formControl {
   align-self: center;
   width: 30%;
-  margin-bottom: 30px !important;
 }
 
 @media (max-width: 770px) {

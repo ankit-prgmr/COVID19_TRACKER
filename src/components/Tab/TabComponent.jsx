@@ -12,12 +12,18 @@ const TabComponent = (props) => {
   const [value, setValue] = useState(0);
   const [data, setData] = useState({});
   const [country, setCountry] = useState("");
+  const [graphData, setGraphData] = useState([]);
 
   useEffect(() => {
     const fetchedData = async () => {
       setData(await fetchData());
     };
     fetchedData();
+
+    const fetchedGraphData = async () => {
+      setGraphData(await fetchDailyData());
+    };
+    fetchedGraphData();
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -28,21 +34,36 @@ const TabComponent = (props) => {
         setData(await fetchData());
       };
       fetchedData();
+
+      const fetchedGraphData = async () => {
+        setGraphData(await fetchDailyData());
+      };
+      fetchedGraphData();
     } else if (newValue === 1) {
       const fetchedNationalData = async () => {
-        setData(await fetchNationalData());
+        const fetchedApiData = await fetchNationalData();
+        setData(fetchedApiData);
+        setGraphData(fetchedApiData.dailyNationalData);
       };
       fetchedNationalData();
     }
   };
 
   const handleCountryChange = async (country) => {
-    setData(await fetchData(country));
+    const retrievedData = await fetchData(country);
+    setData(retrievedData);
+    if (country === "") {
+      const fetchedGraphData = async () => {
+        setGraphData(await fetchDailyData());
+      };
+      fetchedGraphData();
+    } else {
+      setGraphData(retrievedData);
+    }
     setCountry(country);
   };
 
   if (!data) return "Loading";
-  console.log(data);
   return (
     <div className={styles.container}>
       <Paper square>
@@ -70,7 +91,7 @@ const TabComponent = (props) => {
         value={value}
         handleCountryChange={handleCountryChange}
       />
-      {/* <Chart index={0} value={value} data={data} country={country} /> */}
+      <Chart index={0} value={value} graphData={graphData} country={country} />
       <Cards
         index={1}
         value={value}
@@ -89,7 +110,7 @@ const TabComponent = (props) => {
             : []
         }
       />
-      {/* <Chart index={1} value={value} data={nationalData.caseTimeSeries} /> */}
+      <Chart index={1} value={value} graphData={graphData} />
     </div>
   );
 };
