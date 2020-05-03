@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Paper, Tabs, Tab } from "@material-ui/core";
 import { Public, Flag } from "@material-ui/icons";
 import { fetchData, fetchNationalData, fetchDailyData } from "../../api";
-import Cards from "../Cards/Cards";
-import Chart from "../Chart/Chart";
-import CountryPicker from "../CountryPicker/CountryPicker";
-import TableList from "../TableList/TableList";
+import { Cards, Chart, CountryPicker, TableList } from "../index";
 import styles from "./TabComponent.module.css";
 
 const TabComponent = (props) => {
@@ -76,13 +73,7 @@ const TabComponent = (props) => {
           aria-label="icon label tabs example"
         >
           <Tab icon={<Public />} label="WORLD" />
-          <Tab icon={<Flag />} label="INDIA">
-            {/* <Cards data={appState.data[0]} />
-          <TableList
-            data={appState.data.filter((item, index) => index !== 0)}
-          />
-          <Chart data={appState.caseTimeSeries} /> */}
-          </Tab>
+          <Tab icon={<Flag />} label="INDIA" />
         </Tabs>
       </Paper>
       <Cards index={0} value={value} data={data} />

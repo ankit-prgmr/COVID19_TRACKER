@@ -10,6 +10,15 @@
 
 @media (max-width: 770px) {
   .container {
+    display: flex;
     width: 100%;
+    flex-direction: column;
+    margin-top: 5%;
+  }
+}
+
+@media (max-width: 960px) {
+  .container {
+    margin-top: 3%;
   }
 }
