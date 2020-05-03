@@ -3,6 +3,9 @@ import styles from "./Cards.module.css";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import CountUp from "react-countup";
 import cx from "classnames";
+import totalCasesIcon from "../../images/totalCases.png";
+import recoveredIcon from "../../images/recovered.png";
+import deathsIcon from "../../images/deaths.png";
 
 const Cards = ({ index, value, data }) => {
   if (value !== index) return null;
@@ -23,15 +26,15 @@ const Cards = ({ index, value, data }) => {
           md={3}
           className={cx(styles.card, styles.infected)}
         >
-          <CardContent>
+          <CardContent className={styles.cardContent}>
+            <span>
+              <img src={totalCasesIcon} alt="total cases" />
+            </span>
             <Typography color="textSecondary" gutterBottom>
               Confirmed
             </Typography>
             <Typography variant="h5">
               <CountUp start={0} end={confirmed} duration={2.5} separator="," />
-            </Typography>
-            <Typography variant="body2">
-              Number of confirmed cases of COVID-19
             </Typography>
           </CardContent>
         </Grid>
@@ -43,15 +46,15 @@ const Cards = ({ index, value, data }) => {
           md={3}
           className={cx(styles.card, styles.recovered)}
         >
-          <CardContent>
+          <CardContent className={styles.cardContent}>
+            <span>
+              <img src={recoveredIcon} alt="recovered" />
+            </span>
             <Typography color="textSecondary" gutterBottom>
               Recovered
             </Typography>
             <Typography variant="h5">
               <CountUp start={0} end={recovered} duration={2.5} separator="," />
-            </Typography>
-            <Typography variant="body2">
-              Number of recoveries from COVID-19
             </Typography>
           </CardContent>
         </Grid>
@@ -63,15 +66,15 @@ const Cards = ({ index, value, data }) => {
           md={3}
           className={cx(styles.card, styles.deaths)}
         >
-          <CardContent>
+          <CardContent className={styles.cardContent}>
+            <span>
+              <img src={deathsIcon} alt="deaths" />
+            </span>
             <Typography color="textSecondary" gutterBottom>
               Deaths
             </Typography>
             <Typography variant="h5">
               <CountUp start={0} end={deaths} duration={2.5} separator="," />
-            </Typography>
-            <Typography variant="body2">
-              Number of deaths caused by COVID-19
             </Typography>
           </CardContent>
         </Grid>
