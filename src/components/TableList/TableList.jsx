@@ -6,15 +6,15 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Paper,
 } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
 import styles from "./TableList.module.css";
 
 const TableList = ({ index, value, data }) => {
   if (value !== index) return null;
   if (!data) return "Loading";
   return (
-    <TableContainer className={styles.container} component={Card}>
+    <TableContainer className={styles.container} component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
