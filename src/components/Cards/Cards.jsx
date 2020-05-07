@@ -46,7 +46,7 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={confirmed} duration={2.5} separator="," />
             </Typography>
-            {deltaconfirmed ? (
+            {deltaconfirmed && deltaconfirmed > 0 ? (
               <ArrowTicker color="rgba(0,0,255,0.9)" value={deltaconfirmed} />
             ) : null}
           </CardContent>
@@ -69,7 +69,7 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={recovered} duration={2.5} separator="," />
             </Typography>
-            {deltarecovered ? (
+            {deltarecovered && deltarecovered > 0 ? (
               <ArrowTicker color="green" value={deltarecovered} />
             ) : null}
           </CardContent>
@@ -92,7 +92,7 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={deaths} duration={2.5} separator="," />
             </Typography>
-            {deltadeaths ? (
+            {deltadeaths && deltadeaths > 0 ? (
               <ArrowTicker color="red" value={deltadeaths} />
             ) : null}
           </CardContent>
