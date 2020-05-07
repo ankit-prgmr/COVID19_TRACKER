@@ -11,7 +11,6 @@ const Chart = ({ index, value, graphData, country }) => {
     isGraphDataArr = Array.isArray(graphData);
 
   if (graphData && index === 0 && isGraphDataArr) {
-    console.log(graphData);
     dataset = [
       {
         data: graphData.map(({ confirmed }) => confirmed),

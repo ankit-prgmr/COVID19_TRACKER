@@ -16,7 +16,6 @@ export const fetchData = async (country) => {
       deaths: data.deaths.value,
       lastUpdate: data.lastUpdate,
     };
-    console.log(modifiedData.lastUpdate);
     return modifiedData;
   } catch (error) {
     console.log(error);

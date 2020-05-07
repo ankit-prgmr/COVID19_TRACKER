@@ -6,10 +6,20 @@ import cx from "classnames";
 import totalCasesIcon from "../../images/totalCases.png";
 import recoveredIcon from "../../images/recovered.png";
 import deathsIcon from "../../images/deaths.png";
+import ArrowTicker from "../ArrowTicker/ArrowTicker";
 
 const Cards = ({ index, value, data }) => {
   if (value !== index) return null;
-  const { confirmed, recovered, deaths, lastUpdate } = data;
+  const {
+    confirmed,
+    recovered,
+    deaths,
+    deltaconfirmed,
+    deltarecovered,
+    deltadeaths,
+    lastUpdate,
+  } = data;
+
   if (!confirmed) {
     return "Loading...";
   }
@@ -36,6 +46,9 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={confirmed} duration={2.5} separator="," />
             </Typography>
+            {deltaconfirmed ? (
+              <ArrowTicker color="rgba(0,0,255,0.9)" value={deltaconfirmed} />
+            ) : null}
           </CardContent>
         </Grid>
 
@@ -56,6 +69,9 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={recovered} duration={2.5} separator="," />
             </Typography>
+            {deltarecovered ? (
+              <ArrowTicker color="green" value={deltarecovered} />
+            ) : null}
           </CardContent>
         </Grid>
 
@@ -76,6 +92,9 @@ const Cards = ({ index, value, data }) => {
             <Typography variant="h5">
               <CountUp start={0} end={deaths} duration={2.5} separator="," />
             </Typography>
+            {deltadeaths ? (
+              <ArrowTicker color="red" value={deltadeaths} />
+            ) : null}
           </CardContent>
         </Grid>
       </Grid>
