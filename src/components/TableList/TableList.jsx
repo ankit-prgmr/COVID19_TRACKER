@@ -35,7 +35,7 @@ const TableList = ({ index, value, data }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item) => {
+          {data.map((item, index) => {
             const {
               confirmed,
               active,
@@ -47,7 +47,12 @@ const TableList = ({ index, value, data }) => {
               stateName,
             } = item;
             return (
-              <TableRow key={stateName}>
+              <TableRow
+                key={stateName}
+                style={
+                  index % 2 ? { background: "#eee" } : { background: "white" }
+                }
+              >
                 <TableCell component="th" scope="row">
                   {stateName}
                 </TableCell>
