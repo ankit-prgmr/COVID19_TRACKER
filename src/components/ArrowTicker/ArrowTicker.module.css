@@ -1,5 +1,4 @@
 .container {
-  display: flex;
-  align-items: flex-end;
-  margin: 1% 0;
+  display: inline-block;
+  margin: 0 4%;
 }
